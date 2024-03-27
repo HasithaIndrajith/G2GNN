@@ -177,8 +177,8 @@ class TUDataset(InMemoryDataset):
         os.rename(osp.join(folder, self.name), self.raw_dir)
 
     def process(self):
-        self.data, self.slices = read_tu_data(self.raw_dir, self.name)
-
+        X = read_tu_data(self.raw_dir, self.name)
+        self.data, self.slices=X[0],X[1]
         if self.pre_filter is not None:
             data_list = [self.get(idx) for idx in range(len(self))]
             data_list = [data for data in data_list if self.pre_filter(data)]
